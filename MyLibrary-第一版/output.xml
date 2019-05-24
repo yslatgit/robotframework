@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.1 (Python 3.7.2 on win32)" generated="20190524 13:41:12.190" rpa="false">
+<suite id="s1">
+<test id="s1-t1" name="点击输入框">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>http://oa.tahoecn.com/ekp/login.jsp</arg>
+<arg>Chrome</arg>
+</arguments>
+<msg timestamp="20190524 13:41:12.559" level="INFO">Opening browser 'Chrome' to base url 'http://oa.tahoecn.com/ekp/login.jsp'.</msg>
+<status status="PASS" starttime="20190524 13:41:12.558" endtime="20190524 13:41:17.691"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>id=j_username</arg>
+<arg>YSL</arg>
+</arguments>
+<msg timestamp="20190524 13:41:17.691" level="INFO">Typing text 'YSL' into text field 'id=j_username'.</msg>
+<status status="PASS" starttime="20190524 13:41:17.691" endtime="20190524 13:41:17.805"></status>
+</kw>
+<status status="PASS" starttime="20190524 13:41:12.557" endtime="20190524 13:41:17.805" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20190524 13:41:12.194" endtime="20190524 13:41:17.806"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1"></stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
