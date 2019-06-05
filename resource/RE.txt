@@ -1,0 +1,92 @@
+*** Settings ***
+Documentation     *关键字拼装*
+Resource          RE.txt
+Library           SeleniumLibrary
+Library           RequestsLibrary
+Library           MyLibrary
+
+*** Keywords ***
+GET请求
+    [Arguments]    ${url}
+    ${cookie}    Create Dictionary    LtpaToken=AAECAzVDRjc2QjY1NUY4QTk5NjV5YW5nc29uZ2xpbiSQgVCqKHiqWvgEwsz+CcA7Kbc/    SESSION=f1f0b4a6-0be5-4a35-8b88-304f623771d8    SESSION=f1f0b4a6-0be5-4a35-8b88-304f623771d8    SESSION=f1f0b4a6-0be5-4a35-8b88-304f623771d8
+    Create Session    api    ${url}    \    ${cookie}
+    ${response}    Get Request    api    /
+    Sleep    1
+    LOG    ===${response.text}===
+    #Run Keyword If    ${response.status_code}==200    LOG    访问成功
+    ...    # ELSE IF    ${response.status_code}==404    LOG    找不到网页
+    ...    # ELSE IF    ${response.status_code}==500    LOG    服务器错误
+    ...    # ELSE IF    ${response.status_code}==302    LOG    网址重定向
+    #Run Keyword If    系统提示 in ${response.text}    LOG    无权限访问
+
+登录
+    [Arguments]    ${username}    ${password}    ${verify_text}
+    open browser    http://oa.tahoecn.com/ekp/login.jsp    chrome    index
+    input text    id=j_username    ${username}
+    input text    id=j_password    ${password}
+    click element    Xpath=//a[@id='submit']
+    Maximize Browser Window
+    page should contain    ${verify_text}
+
+请求左侧菜单项链接
+    ${link}    Get WebElements    Xpath=//ul[contains(@class,'sidebar_inner_list') and contains(@class,'clearfix')]/li/a
+    LOG    ${link[0].text}
+    #: FOR    ${i}    IN    @{link[:2]}
+    #    LOG    ${i.text}
+    #    GET请求    ${i.get_attribute ("href")}
+
+检测new标识
+    ${news_count_once}    Get Element Count    Xpath=//ul/li/a[@target='_blank']/img[@class='show']
+    Run Keyword IF    ${news_count_once}=='0'    LOG    没有new标识
+    ${news_link}    Get WebElements    Xpath=//ul/li/a[@target='_blank']/img[@class='show']
+    #:FOR    ${news}    IN    @{news_link}
+    Click Button    ${news_link[0]}    #=${news.find_element_by_xpath ("./..").get_attribute("href")}=
+    Switch Browser    index
+    Reload Page
+    ${news_count_twice}    Get Element Count    Xpath=//ul/li/a[@target='_blank']/img[@class='show']
+    Run Keyword IF    ${news_count_twice}<${news_count_once}    LOG    new标识点击后消失
+
+JS操作
+    [Arguments]    ${args}    # 要进行的操作名称
+    Run Keyword IF    "${args}"=="跳过mov"    Execute Javascript    document.getElementsByClassName('modal_box')[0].style.display='none';
+    ...    ELSE IF    "${args}"=="向下滑动页面"    Execute Javascript    window.scrollTo(0,document.body.scrollHeight)
+
+获取模块名称
+    Sleep    2
+    ${module_names_count}    Get Element Count    Xpath=//li[@class='sortable_li']/div/span
+    ${module_names}    Get WebElements    Xpath=//li[@class='sortable_li']/div/span
+    Run Keyword If    ${module_names_count}=="0"    LOG    没有自己添加的模块
+    : FOR    ${i}    IN    @{module_names}
+    \    log    ${i.text}
+
+获取banner
+    ${ss}    Get WebElements    Xpath=//div[contains(@class,'swiper-slide')]/a    #Xpath=//div[@class='swiper-wrapper']/div/a
+    : FOR    ${i}    IN    @{ss[:3]}
+    \    log    ===${i.get_attribute("href")}
+
+点击回车键
+    [Arguments]    ${loc}
+    Press Key    ${loc}    \\13
+
+Return_a_List
+    [Arguments]    ${loc}
+    ${list}    create list
+    ${menus}    Get WebElements    ${loc}
+    : FOR    ${menu}    IN    @{menus}
+    \    LOG    =${menu.get_attribute('text')}
+    \    GET请求    ${menu.get_attribute("href")}
+    \    Set Variable    ${list.append("${menu.get_attribute('text')}")}
+    [Return]    ${list}
+
+练习
+    [Arguments]    ${loc}
+    ${a}    Return_a_List    ${loc}
+    log    ${a}
+
+Return_List
+    [Arguments]    ${loc}
+    ${list}    create list
+    ${menus}    Get WebElements    ${loc}
+    : FOR    ${menu}    IN    @{menus}
+    \    Set Variable    ${list.append("${menu.text}")}
+    [Return]    ${list}
