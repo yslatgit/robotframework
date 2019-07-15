@@ -1,0 +1,21 @@
+*** Settings ***
+Library           SSHLibrary
+Library           MyLibrary
+
+*** Keywords ***
+S_Connection
+    [Arguments]    ${ip}    ${username}    ${password}
+    Open Connection    ${ip}
+    Login    ${username}    ${password}
+
+S_R_Start_Tomcat
+    Log    修改端口号
+    Start Command    python /home/ysl/tomcat/conf/change_tomcat_port.py
+    Log    修改端口后启动服务器
+    Start Command    nohup /home/ysl/tomcat/bin/startup.sh
+
+S_Command
+    [Arguments]    ${command}    @{args}
+    ${mingling}    Create Command    ${command}    @{args}
+    ${data}    Execute Command    ${mingling}
+    [Return]    ${data}

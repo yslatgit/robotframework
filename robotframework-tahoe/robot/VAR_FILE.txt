@@ -1,0 +1,3 @@
+*** Settings ***
+Documentation     __all__ = ['login_data','integer']
+Variables         C:/Users/Administrator/Desktop/resource/var.py

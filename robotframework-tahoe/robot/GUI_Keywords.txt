@@ -1,0 +1,32 @@
+*** Settings ***
+Library           SeleniumLibrary
+
+*** Keywords ***
+G_Click_Element
+    [Arguments]    ${locator}    # 被点击元素的定位器
+    Click Element    ${locator}
+
+G_Drag
+
+G_Login
+    [Arguments]    ${username}    ${password}
+    Open Browser    %{G_TEST_ADDR}    %{G_BROWSER_TYPE}
+    Input Text    j_username    ${username}
+    Input Text    j_password    ${password}
+    Click Element    Xpath=//a[@id='submit']
+
+G_Open_Browser
+    [Arguments]    ${url}    ${browser}=%{G_BROWSER_TYPE}
+    log    ${browser}
+    Close All Browsers
+    ${chrome_options}    Evaluate    sys.modules["selenium.webdriver"].ChromeOption()    sys,selenium.webdriver    #配置headless启动方式
+    Call Method    ${chrome_options}    add_argument    headless
+    Call Method    ${chrome_options}    add_argument    disable-gpu
+    Create Webdriver    Chrome    chrome_options=${chrome_options}
+    go to    ${url}
+
+G_Js_Roll
+    Execute Javascript    window.scrollTo(0,document.body.scrollHeight)
+
+G_Js_MengCeng
+    Execute Javascript    document.getElementsByClassName('modal_box')[0].style.display='none';

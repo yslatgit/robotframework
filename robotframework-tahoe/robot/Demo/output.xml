@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.1 (Python 3.7.2 on win32)" generated="20190708 09:31:46.573" rpa="false">
+<suite id="s1" name="Demo" source="D:\robotframework\robot\Demo">
+<suite id="s1-s1" name="Interface" source="D:\robotframework\robot\Demo\interface.robot">
+<test id="s1-s1-t1" name="get_request">
+<kw name="get_current_user_cookie">
+<assign>
+<var>${cookies}</var>
+</assign>
+<kw name="G_Login" library="GUI_Keywords">
+<arguments>
+<arg>vgaoge</arg>
+<arg>123456</arg>
+</arguments>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>%{G_TEST_ADDR}</arg>
+<arg>%{G_BROWSER_TYPE}</arg>
+</arguments>
+<msg timestamp="20190708 09:31:47.182" level="FAIL">Environment variable '%{G_TEST_ADDR}' not found.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.181" endtime="20190708 09:31:47.182"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.181" endtime="20190708 09:31:47.183"></status>
+</kw>
+<kw name="Close Window" library="SeleniumLibrary" type="teardown">
+<doc>Closes currently opened pop-up window.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20190708 09:31:47.183" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20190708 09:31:47.183" endtime="20190708 09:31:47.183"></status>
+</kw>
+<msg timestamp="20190708 09:31:47.233" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.183" endtime="20190708 09:31:47.233">No browser is open.</status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.180" endtime="20190708 09:31:47.234"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.180" endtime="20190708 09:31:47.236" critical="yes">Environment variable '%{G_TEST_ADDR}' not found.
+
+Also keyword teardown failed:
+No browser is open.</status>
+</test>
+<test id="s1-s1-t2" name="get_request">
+<kw name="get_current_user_cookie">
+<assign>
+<var>${cookies}</var>
+</assign>
+<kw name="G_Login" library="GUI_Keywords">
+<arguments>
+<arg>vgaoge</arg>
+<arg>123456</arg>
+</arguments>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>%{G_TEST_ADDR}</arg>
+<arg>%{G_BROWSER_TYPE}</arg>
+</arguments>
+<msg timestamp="20190708 09:31:47.256" level="FAIL">Environment variable '%{G_TEST_ADDR}' not found.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.251" endtime="20190708 09:31:47.257"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.250" endtime="20190708 09:31:47.257"></status>
+</kw>
+<kw name="Close Window" library="SeleniumLibrary" type="teardown">
+<doc>Closes currently opened pop-up window.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20190708 09:31:47.259" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20190708 09:31:47.259" endtime="20190708 09:31:47.259"></status>
+</kw>
+<msg timestamp="20190708 09:31:47.261" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.258" endtime="20190708 09:31:47.261">No browser is open.</status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.249" endtime="20190708 09:31:47.262"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.241" endtime="20190708 09:31:47.263" critical="yes">Environment variable '%{G_TEST_ADDR}' not found.
+
+Also keyword teardown failed:
+No browser is open.</status>
+</test>
+<test id="s1-s1-t3" name="post_request">
+<kw name="get_current_user_cookie">
+<assign>
+<var>${cookies}</var>
+</assign>
+<kw name="G_Login" library="GUI_Keywords">
+<arguments>
+<arg>vgaoge</arg>
+<arg>123456</arg>
+</arguments>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>%{G_TEST_ADDR}</arg>
+<arg>%{G_BROWSER_TYPE}</arg>
+</arguments>
+<msg timestamp="20190708 09:31:47.275" level="FAIL">Environment variable '%{G_TEST_ADDR}' not found.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.272" endtime="20190708 09:31:47.275"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.271" endtime="20190708 09:31:47.276"></status>
+</kw>
+<kw name="Close Window" library="SeleniumLibrary" type="teardown">
+<doc>Closes currently opened pop-up window.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20190708 09:31:47.278" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20190708 09:31:47.277" endtime="20190708 09:31:47.278"></status>
+</kw>
+<msg timestamp="20190708 09:31:47.280" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.276" endtime="20190708 09:31:47.280">No browser is open.</status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.270" endtime="20190708 09:31:47.280"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.268" endtime="20190708 09:31:47.282" critical="yes">Environment variable '%{G_TEST_ADDR}' not found.
+
+Also keyword teardown failed:
+No browser is open.</status>
+</test>
+<test id="s1-s1-t4" name="post_request">
+<kw name="get_current_user_cookie">
+<assign>
+<var>${cookies}</var>
+</assign>
+<kw name="G_Login" library="GUI_Keywords">
+<arguments>
+<arg>vgaoge</arg>
+<arg>123456</arg>
+</arguments>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>%{G_TEST_ADDR}</arg>
+<arg>%{G_BROWSER_TYPE}</arg>
+</arguments>
+<msg timestamp="20190708 09:31:47.292" level="FAIL">Environment variable '%{G_TEST_ADDR}' not found.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.290" endtime="20190708 09:31:47.292"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.289" endtime="20190708 09:31:47.292"></status>
+</kw>
+<kw name="Close Window" library="SeleniumLibrary" type="teardown">
+<doc>Closes currently opened pop-up window.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20190708 09:31:47.293" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20190708 09:31:47.293" endtime="20190708 09:31:47.293"></status>
+</kw>
+<msg timestamp="20190708 09:31:47.294" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.292" endtime="20190708 09:31:47.294">No browser is open.</status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.289" endtime="20190708 09:31:47.294"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.288" endtime="20190708 09:31:47.295" critical="yes">Environment variable '%{G_TEST_ADDR}' not found.
+
+Also keyword teardown failed:
+No browser is open.</status>
+</test>
+<test id="s1-s1-t5" name="login_interface">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+<arg>Referer=http://ucssotest.tahoecndemo.com:9988/logout?ReturnURL=http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Findex.html&amp;sysId=OA</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.300" level="INFO">${headers} = {'Content-Type': 'application/x-www-form-urlencoded', 'Referer': 'http://ucssotest.tahoecndemo.com:9988/logout?ReturnURL=http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Findex.html&amp;sysId=OA'}</msg>
+<status status="PASS" starttime="20190708 09:31:47.299" endtime="20190708 09:31:47.300"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>JSESSIONID=4AE6D27116C166C11B0AC8BA9390BD7B</arg>
+</arguments>
+<assign>
+<var>${cookies}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.301" level="INFO">${cookies} = {'JSESSIONID': '4AE6D27116C166C11B0AC8BA9390BD7B'}</msg>
+<status status="PASS" starttime="20190708 09:31:47.300" endtime="20190708 09:31:47.301"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>username=vgaoge</arg>
+<arg>password=MTIzNDU2YXMxNHU1OWcyM2I=</arg>
+<arg>deCodePassword=as14u59g23b</arg>
+<arg>pictureCode=</arg>
+<arg>rememberPwd=0</arg>
+<arg>ReturnURL=http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Findex.html</arg>
+<arg>sysId=OA</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.302" level="INFO">${data} = {'username': 'vgaoge', 'password': 'MTIzNDU2YXMxNHU1OWcyM2I=', 'deCodePassword': 'as14u59g23b', 'pictureCode': '', 'rememberPwd': '0', 'ReturnURL': 'http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Fi...</msg>
+<status status="PASS" starttime="20190708 09:31:47.302" endtime="20190708 09:31:47.302"></status>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<arguments>
+<arg>vgaoge</arg>
+<arg>12346</arg>
+</arguments>
+<assign>
+<var>${auth}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.303" level="INFO">${auth} = ['vgaoge', '12346']</msg>
+<status status="PASS" starttime="20190708 09:31:47.303" endtime="20190708 09:31:47.303"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>http://ucssotest.tahoecndemo.com:9988/loginpost</arg>
+<arg>auth=${auth}</arg>
+</arguments>
+<msg timestamp="20190708 09:31:47.304" level="INFO">Creating Session using : alias=api, url=http://ucssotest.tahoecndemo.com:9988/loginpost, headers=,                     cookies=, auth=&lt;requests.auth.HTTPBasicAuth object at 0x0000000004D24550&gt;, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20190708 09:31:47.304" endtime="20190708 09:31:47.305"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>/</arg>
+</arguments>
+<assign>
+<var>${re}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.520" level="INFO">Post Request using : alias=api, uri=/, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20190708 09:31:47.521" level="INFO">${re} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20190708 09:31:47.305" endtime="20190708 09:31:47.521"></status>
+</kw>
+<kw name="Get Cookies" library="SeleniumLibrary">
+<doc>Returns all cookies of the current page.</doc>
+<assign>
+<var>${coo}</var>
+</assign>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20190708 09:31:47.526" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20190708 09:31:47.526" endtime="20190708 09:31:47.526"></status>
+</kw>
+<msg timestamp="20190708 09:31:47.549" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.525" endtime="20190708 09:31:47.550"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.298" endtime="20190708 09:31:47.554" critical="yes">No browser is open.</status>
+</test>
+<test id="s1-s1-t6" name="login_interface">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+<arg>Referer=http://ucssotest.tahoecndemo.com:9988/logout?ReturnURL=http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Findex.html&amp;sysId=OA</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.559" level="INFO">${headers} = {'Content-Type': 'application/x-www-form-urlencoded', 'Referer': 'http://ucssotest.tahoecndemo.com:9988/logout?ReturnURL=http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Findex.html&amp;sysId=OA'}</msg>
+<status status="PASS" starttime="20190708 09:31:47.558" endtime="20190708 09:31:47.559"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>JSESSIONID=4AE6D27116C166C11B0AC8BA9390BD7B</arg>
+</arguments>
+<assign>
+<var>${cookies}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.561" level="INFO">${cookies} = {'JSESSIONID': '4AE6D27116C166C11B0AC8BA9390BD7B'}</msg>
+<status status="PASS" starttime="20190708 09:31:47.561" endtime="20190708 09:31:47.562"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>username=vgaoge</arg>
+<arg>password=MTIzNDU2YXMxNHU1OWcyM2I=</arg>
+<arg>deCodePassword=as14u59g23b</arg>
+<arg>pictureCode=</arg>
+<arg>rememberPwd=0</arg>
+<arg>ReturnURL=http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Findex.html</arg>
+<arg>sysId=OA</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.563" level="INFO">${data} = {'username': 'vgaoge', 'password': 'MTIzNDU2YXMxNHU1OWcyM2I=', 'deCodePassword': 'as14u59g23b', 'pictureCode': '', 'rememberPwd': '0', 'ReturnURL': 'http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Fi...</msg>
+<status status="PASS" starttime="20190708 09:31:47.563" endtime="20190708 09:31:47.564"></status>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<arguments>
+<arg>vgaoge</arg>
+<arg>12346</arg>
+</arguments>
+<assign>
+<var>${auth}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.565" level="INFO">${auth} = ['vgaoge', '12346']</msg>
+<status status="PASS" starttime="20190708 09:31:47.564" endtime="20190708 09:31:47.565"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>http://ucssotest.tahoecndemo.com:9988/loginpost</arg>
+<arg>auth=${auth}</arg>
+</arguments>
+<msg timestamp="20190708 09:31:47.567" level="INFO">Creating Session using : alias=api, url=http://ucssotest.tahoecndemo.com:9988/loginpost, headers=,                     cookies=, auth=&lt;requests.auth.HTTPBasicAuth object at 0x0000000004D32208&gt;, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20190708 09:31:47.566" endtime="20190708 09:31:47.567"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>/</arg>
+</arguments>
+<assign>
+<var>${re}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.734" level="INFO">Post Request using : alias=api, uri=/, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20190708 09:31:47.734" level="INFO">${re} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20190708 09:31:47.568" endtime="20190708 09:31:47.734"></status>
+</kw>
+<kw name="Get Cookies" library="SeleniumLibrary">
+<doc>Returns all cookies of the current page.</doc>
+<assign>
+<var>${coo}</var>
+</assign>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20190708 09:31:47.737" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20190708 09:31:47.737" endtime="20190708 09:31:47.738"></status>
+</kw>
+<msg timestamp="20190708 09:31:47.739" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.736" endtime="20190708 09:31:47.739"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.557" endtime="20190708 09:31:47.743" critical="yes">No browser is open.</status>
+</test>
+<test id="s1-s1-t7" name="data_from_excel">
+<kw name="Get Data From Excel" library="MyLibrary">
+<doc>从excel获取测试数据，返回的数据格式为列表</doc>
+<arguments>
+<arg>%{G_RESUORCE}\\ride.xlsx</arg>
+<arg>ride</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.751" level="FAIL">Environment variable '%{G_RESUORCE}' not found.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.748" endtime="20190708 09:31:47.751"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.746" endtime="20190708 09:31:47.752" critical="yes">Environment variable '%{G_RESUORCE}' not found.</status>
+</test>
+<test id="s1-s1-t8" name="data_from_excel">
+<kw name="Get Data From Excel" library="MyLibrary">
+<doc>从excel获取测试数据，返回的数据格式为列表</doc>
+<arguments>
+<arg>%{G_RESUORCE}\\ride.xlsx</arg>
+<arg>ride</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20190708 09:31:47.762" level="FAIL">Environment variable '%{G_RESUORCE}' not found.</msg>
+<status status="FAIL" starttime="20190708 09:31:47.759" endtime="20190708 09:31:47.762"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.757" endtime="20190708 09:31:47.763" critical="yes">Environment variable '%{G_RESUORCE}' not found.</status>
+</test>
+<test id="s1-s1-t9" name="aa">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>http://ucssotest.tahoecndemo.com:9988/logout?ReturnURL=http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Findex.html&amp;sysId=OA</arg>
+<arg>360</arg>
+</arguments>
+<msg timestamp="20190708 09:31:47.769" level="INFO">Opening browser '360' to base url 'http://ucssotest.tahoecndemo.com:9988/logout?ReturnURL=http%3A%2F%2Foa.tahoecndemo.com%3A8080%2Fportal%2Findex.html&amp;sysId=OA'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<status status="FAIL" starttime="20190708 09:33:00.467" endtime="20190708 09:33:00.468"></status>
+</kw>
+<msg timestamp="20190708 09:33:00.468" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Execution terminated by signal</msg>
+<status status="FAIL" starttime="20190708 09:31:47.769" endtime="20190708 09:33:00.472"></status>
+</kw>
+<status status="FAIL" starttime="20190708 09:31:47.766" endtime="20190708 09:33:00.473" critical="yes">Execution terminated by signal</status>
+</test>
+<test id="s1-s1-t10" name="aa">
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.476" endtime="20190708 09:33:00.477" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<status status="FAIL" starttime="20190708 09:31:46.605" endtime="20190708 09:33:00.492"></status>
+</suite>
+<suite id="s1-s2" name="Login" source="D:\robotframework\robot\Demo\Login.robot">
+<test id="s1-s2-t1" name="login_template">
+<doc>登录oa测试</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.506" endtime="20190708 09:33:00.507" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t2" name="login_template">
+<doc>登录oa测试</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.508" endtime="20190708 09:33:00.509" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t3" name="remember_pwd">
+<doc>登录时记住密码操作</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.511" endtime="20190708 09:33:00.513" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t4" name="remember_pwd">
+<doc>登录时记住密码操作</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.514" endtime="20190708 09:33:00.516" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t5" name="forget_pwd">
+<doc>登录时忘记密码操作</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.517" endtime="20190708 09:33:00.520" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t6" name="forget_pwd">
+<doc>登录时忘记密码操作</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.521" endtime="20190708 09:33:00.525" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t7" name="taixin_login">
+<doc>登录时点击泰信登录</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.530" endtime="20190708 09:33:00.533" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t8" name="taixin_login">
+<doc>登录时点击泰信登录</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.535" endtime="20190708 09:33:00.539" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t9" name="mb_login">
+<doc>登录时点击手机号登陆</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.545" endtime="20190708 09:33:00.547" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t10" name="mb_login">
+<doc>登录时点击手机号登陆</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.549" endtime="20190708 09:33:00.553" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<status status="FAIL" starttime="20190708 09:33:00.503" endtime="20190708 09:33:00.562"></status>
+</suite>
+<suite id="s1-s3" name="Ssh" source="D:\robotframework\robot\Demo\ssh.robot">
+<test id="s1-s3-t1" name="connection">
+<doc>根据端口校验服务是否启动</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.566" endtime="20190708 09:33:00.573" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t2" name="connection">
+<doc>根据端口校验服务是否启动</doc>
+<tags>
+<tag>robot:exit</tag>
+</tags>
+<status status="FAIL" starttime="20190708 09:33:00.576" endtime="20190708 09:33:00.578" critical="yes">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t3" name="dada">
+<errors>
+<msg timestamp="20190708 09:33:00.468" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Execution terminated by signal</msg>
+<msg timestamp="20190708 09:33:00.581" level="ERROR">Execution stopped by user.</msg>
+</errors>
+</robot>
