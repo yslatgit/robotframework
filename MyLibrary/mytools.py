@@ -3,7 +3,8 @@
 import os,time,json
 import requests
 
-from CustomLibClass import GetDataFromExcel,UpdataFile,HandleCookies
+
+from CustomLibClass import GetDataFromExcel,UpdataFile,HandleCookies,MakeCommand
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p))
@@ -101,6 +102,16 @@ class MyTools:
         aa = UpdataFile(path=path)
         aa.updata()
 
+    def create_command(self,command,*args):
+        """生成linux命令字符串
+
+        command:必传参数，例如：ps,grep...
+
+        args:后面的参数值
+        """
+        aa = MakeCommand(command,*args)
+        msg = aa.make_command()
+        return msg
 
 if __name__ == "__main__":
     m = MyTools()
@@ -109,4 +120,6 @@ if __name__ == "__main__":
     # m.re_data({'parent': '员工自助', 'name': '机票预订', 'url': 'http://oa.tahoecn.com/ekp/km/corporatetravel/pc_login.jsp', 'permission': ['未开通']})
     # m.save_to_file("D:\测试\data3.txt")
     # m.download("http://im.tahoecn.com/download/tChat_pc.exe")
-    m.test()
+    # datas = "BIGipServerpool_testOA_portal=996671498.36895.0000; UCSSOID=eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI4NjE0ZmU1MTg4NDE0OTQ2YmI1YThlOTE0MzhkZDc2MyIsInRfaXAiOiIxMC4zMS4yOS4zOCIsInRfc2kiOiJPQSIsInRfdWkiOnsiZmRVc2VybmFtZSI6InZnYW9nZSIsImZkT3JnTmFtZVRyZWUiOiIv5rOw56a-6ZuG5ZuiL-mbhuWbouaAu-mDqC_kv6Hmga_mtYHnqIvpg6gv5YiG5L6b5pa557uEIiwiZmRTaWQiOiI4NjE0ZmU1MTg4NDE0OTQ2YmI1YThlOTE0MzhkZDc2MyIsImZkTmFtZSI6IumrmOmYgSIsImZkR2VuZGVyIjoxLCJmZE9yZ0lkIjoiMTVhYTI5YTRkMzNkYWI4NzEyMGZjYTY0Y2VlOTRmMmMiLCJmZE9yZ05hbWUiOiLliIbkvpvmlrnnu4QiLCJmZE9yZ0lkVHJlZSI6Ii8xNWE3ZjM1MGY0YjdiNzM4YzA5NWE4OTRkN2NiOTU2Ni8xNWE3ZjM1MGY1MDk1Yzg3NDQ4YjAwZTRjOTBhODhkNC8xNWE3ZjM1MGY5NzE5Zjg1YjNiNTk4MTQwYzU5NmU5Yi8xNWFhMjlhNGQzM2RhYjg3MTIwZmNhNjRjZWU5NGYyYyJ9LCJpc3MiOiJ2Z2FvZ2UiLCJ0X3VhIjoiZjM5MTgiLCJpYXQiOjE1NjI2MzUwMDZ9.2VC31qfjumD8M8hUDaTrJh__N9PAqD9Jl0SF2YGrr46Y9HvY3ckyuVf7Nf1O0j4ys5ghzyh2yoVOnc0e4PqS2A; LtpaToken=AAECAzVEMjNFQUZFNUZCNzE4RkV2Z2FvZ2WxSpdaGuaXD26322cG9/aKS1Qa5g==; BIGipServerpool_testOA_8080=2540175370.36895.0000; SESSION=bfd29dc1-e301-4101-9223-6ca73403405b"
+    # m.handle_cookies(datas)
+    print(m.create_command("ps"))

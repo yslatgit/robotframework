@@ -3,7 +3,9 @@
 import os
 import time
 import autoit
+
 from xlrd import open_workbook
+from SSHLibrary.library import SSHLibrary
 
 
 PATH = lambda p: os.path.abspath(
@@ -89,9 +91,33 @@ class HandleCookies:
         for data in datas:
             data = data.strip()
             data = data.partition("=")
+            # data = data.split("=")
             dict[data[0]] = data[2]
         return dict
 
+"""SSH操作"""
+
+class MakeCommand:
+    """通过此函数生成linux命令字符串"""
+    def __init__(self,command,*args):
+        self.command = command
+        self.args = args
+        self.msg = ""
+        self.content = self._handle_args()
+
+    def _handle_args(self):
+        """处理多个参数"""
+        list_args = list(self.args)
+        # print(len(list_args))
+        if len(list_args) != 0:
+            for i in list_args:
+                self.msg = self.msg + " " + i
+        return self.msg
+
+    def make_command(self):
+        return self.command + self.content
+
+
 if __name__ == '__main__':
-    a = UpdataFile(path=None)
-    a.updata()
+    a = MakeCommand("grep","测试","/home/ysl")
+    print(a.make_command())
