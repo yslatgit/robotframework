@@ -1,11 +1,11 @@
 #coding:utf-8
 
-import os,time,json
+import os,time,json,re
 import requests
 
 
-from CustomLibClass import GetDataFromExcel,UpdataFile,HandleCookies,MakeCommand
-
+from CustomLibClass import GetDataFromExcel,UpdataFile,HandleCookies,MakeCommand,CompareTime
+from CustomLibClass import TimeInListSort
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p))
 
@@ -82,7 +82,7 @@ class MyTools:
     def get_data_from_excel(self,path,sheet_name,datatype=1,num=-1):
         """从excel获取测试数据，返回的数据格式为列表
 
-        path:要读取的excel文件的绝对路径
+        path:1.文件的目录（需要结合delete_file使用）2.excel的绝对路径
 
         sheet_name:要读取excel文件中的sheet表表名
 
@@ -90,9 +90,10 @@ class MyTools:
 
         num:返回第几行数据默认为全部
         """
+        time.sleep(5)
         obj = GetDataFromExcel(path,sheet_name,datatype,num)
-        data = obj.get_data()
-        return data
+        msg = obj.get_data()
+        return msg
 
     def upload_file(self,path):
         """使用AutoIt处理上传文件弹窗
@@ -113,6 +114,93 @@ class MyTools:
         msg = aa.make_command()
         return msg
 
+    def delete_file(self,path,postfix):
+        """
+        删除指定目录下，指定格式的文件
+
+        :param path: 要删除文件所在的目录
+        
+        :param postfix: 要删除文件的格式
+        """
+        os.chdir(path)
+        for filename in os.listdir(path):
+            if filename.endswith('.'+postfix):
+                os.unlink(filename)
+
+    def compare_time(self,start_time,end_time,time_list):
+        """
+        比较时间结果集是否在某个范围内
+
+        :param start_time: 指定时间范围的开始时间
+
+        :param end_time: 指定时间范围的结束时间
+
+        :param time_list: 要比较的时间集
+
+        :return:通过不返回信息，出错返回错误信息
+        """
+        aa = CompareTime(start_time,end_time,time_list)
+        msg = aa.compare_time()
+        return msg
+
+    def time_sort(self,datas,type=1):
+        """
+        查看列表中的时间是否排序
+
+        :datas:数据列表
+
+        :type:不为0时从datas中正则匹配出日期字符串
+
+        :return: 正确时返回None
+        """
+        a = TimeInListSort(datas,type=1)
+        msg = a.sort()
+        return msg
+
+    def Calculate_difference(self,num_one,num_two):
+        """
+        计算两个数的差
+
+        :param num_one:被减数
+
+        :param num_two: 减数
+
+        :return: 差
+        """
+        one = int(num_one)
+        two = int(num_two)
+        return two-one
+
+    def get_num_from_string(self,string,type="0"):
+        """
+        获取字符串中的数字
+
+        :param string:传入的字符串
+
+        :type:返回数值的规则--1代表XX:XX,默认返回数字
+
+        :return: 返回数值列表
+        """
+        if type == "1":
+            list = re.findall(r"\d{2}:\d{2}",string)
+        else:
+            list = re.findall(r"\d+",string)
+        return list
+
+    def format_to_list(self,args):
+        """
+        处理列表包含的元组
+
+        :param args: 列表
+
+        :return: [[],[]]
+
+        """
+        result = []
+        for i in args:
+            result.append(list(i))
+        return result
+
 if __name__ == "__main__":
     m = MyTools()
     # # m.login("http://oa.tahoecn.com/ekp/login.jsp","id=j_username","id=j_password","Xpath=//a[@id='submit']")
@@ -122,4 +210,5 @@ if __name__ == "__main__":
     # m.download("http://im.tahoecn.com/download/tChat_pc.exe")
     # datas = "BIGipServerpool_testOA_portal=996671498.36895.0000; UCSSOID=eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI4NjE0ZmU1MTg4NDE0OTQ2YmI1YThlOTE0MzhkZDc2MyIsInRfaXAiOiIxMC4zMS4yOS4zOCIsInRfc2kiOiJPQSIsInRfdWkiOnsiZmRVc2VybmFtZSI6InZnYW9nZSIsImZkT3JnTmFtZVRyZWUiOiIv5rOw56a-6ZuG5ZuiL-mbhuWbouaAu-mDqC_kv6Hmga_mtYHnqIvpg6gv5YiG5L6b5pa557uEIiwiZmRTaWQiOiI4NjE0ZmU1MTg4NDE0OTQ2YmI1YThlOTE0MzhkZDc2MyIsImZkTmFtZSI6IumrmOmYgSIsImZkR2VuZGVyIjoxLCJmZE9yZ0lkIjoiMTVhYTI5YTRkMzNkYWI4NzEyMGZjYTY0Y2VlOTRmMmMiLCJmZE9yZ05hbWUiOiLliIbkvpvmlrnnu4QiLCJmZE9yZ0lkVHJlZSI6Ii8xNWE3ZjM1MGY0YjdiNzM4YzA5NWE4OTRkN2NiOTU2Ni8xNWE3ZjM1MGY1MDk1Yzg3NDQ4YjAwZTRjOTBhODhkNC8xNWE3ZjM1MGY5NzE5Zjg1YjNiNTk4MTQwYzU5NmU5Yi8xNWFhMjlhNGQzM2RhYjg3MTIwZmNhNjRjZWU5NGYyYyJ9LCJpc3MiOiJ2Z2FvZ2UiLCJ0X3VhIjoiZjM5MTgiLCJpYXQiOjE1NjI2MzUwMDZ9.2VC31qfjumD8M8hUDaTrJh__N9PAqD9Jl0SF2YGrr46Y9HvY3ckyuVf7Nf1O0j4ys5ghzyh2yoVOnc0e4PqS2A; LtpaToken=AAECAzVEMjNFQUZFNUZCNzE4RkV2Z2FvZ2WxSpdaGuaXD26322cG9/aKS1Qa5g==; BIGipServerpool_testOA_8080=2540175370.36895.0000; SESSION=bfd29dc1-e301-4101-9223-6ca73403405b"
     # m.handle_cookies(datas)
-    print(m.create_command("ps"))
+    # print(m.create_command("ps"))
+    print(m.compare_time("2019-07-01","2019-07-05",["2019-07-02","2019-07-03","2019-07-07"]))

@@ -1,0 +1,16 @@
+*** Settings ***
+Library           DatabaseLibrary
+Variables         ./sql.py
+Library           MyLibrary
+
+*** Keywords ***
+DB_data
+    [Arguments]    ${sql}
+    [Documentation]    查询数据库中的数据返回数据列表
+    Connect To Database Using Custom Params    pyodbc    "Driver={SQL Server};Server=10.0.104.238;Port=1433;Database=tahoe_atnd;UID=KQ;PWD=KQpassword;"
+    ${var}    query    ${sql}
+    ${res}    format_to_list    ${var}
+    [Return]    ${res}
+
+DB_data_count
+    [Documentation]    查询数据库中的数据返回总数

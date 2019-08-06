@@ -1,19 +1,21 @@
 *** Settings ***
 Library           SeleniumLibrary
+Library           MyLibrary
+Library           Collections
 
 *** Keywords ***
-G_Click_Element
-    [Arguments]    ${locator}    # 被点击元素的定位器
-    Click Element    ${locator}
-
 G_Drag
 
 G_Login
     [Arguments]    ${username}    ${password}
+    [Documentation]    登录
     Open Browser    %{G_TEST_ADDR}    %{G_BROWSER_TYPE}
     Input Text    j_username    ${username}
     Input Text    j_password    ${password}
     Click Element    Xpath=//a[@id='submit']
+    Maximize Browser Window
+    G_Js_MengCeng
+    #Add Cookie    UCSSOID    eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkNzJhMDFmOTg2MDY0MmYwOWRkOTk2ODA1NzUwMGVkNyIsInRfaXAiOiIxMC4zMS4yOS4zMCIsInRfc2kiOiJPQSIsInRfdWkiOnsiZmRVc2VybmFtZSI6Inlhbmd6aG9uZ21pbmciLCJmZE9yZ05hbWVUcmVlIjoiL-azsOemvumbhuWboi_pm4blm6LmgLvpg6gv5Lq65Yqb6LWE5rqQ6YOoL-aLm-iBmOS4iee7hCIsImZkU2lkIjoiZDcyYTAxZjk4NjA2NDJmMDlkZDk5NjgwNTc1MDBlZDciLCJmZE5hbWUiOiLmnajpkp_puKMiLCJmZEdlbmRlciI6LTEsImZkT3JnSWQiOiIxNWMxNmI1NWJlMmNjYjM1ZWU0ZDhmYzQ3YWE4YjM4NiIsImZkT3JnTmFtZSI6IuaLm-iBmOS4iee7hCIsImZkT3JnSWRUcmVlIjoiLzE1YTdmMzUwZjRiN2I3MzhjMDk1YTg5NGQ3Y2I5NTY2LzE1YTdmMzUwZjUwOTVjODc0NDhiMDBlNGM5MGE4OGQ0LzE1YTdmMzUwZjgxMDViNDVmZTY2MDQyNGRkY2EwMDAyLzE1YzE2YjU1YmUyY2NiMzVlZTRkOGZjNDdhYThiMzg2In0sImlzcyI6Inlhbmd6aG9uZ21pbmciLCJ0X3VhIjoiZjM5MTgiLCJpYXQiOjE1NjM4NzYwOTh9.-reuRNdyT_RNaZzPHUswtNs_Gop87LAyTFXdpvzCGHUCzK0Gd19MaYopmFAcHxTsoZnInvvHgTr6g2U52YnBIA    domain=.tahoecndemo.com
 
 G_Open_Browser
     [Arguments]    ${url}    ${browser}=%{G_BROWSER_TYPE}
@@ -29,4 +31,148 @@ G_Js_Roll
     Execute Javascript    window.scrollTo(0,document.body.scrollHeight)
 
 G_Js_MengCeng
+    [Documentation]    跳过蒙层
     Execute Javascript    document.getElementsByClassName('modal_box')[0].style.display='none';
+
+G_Jump_Module
+    [Arguments]    ${locator}    # 日常考勤管理的二级菜单
+    [Documentation]    跳转页面到考勤系统-->员工信息管理
+    G_OverAndClick    Xpath=//ul[@class="sidebar_ul"]/li[2]    Xpath=/html/body/div[1]/div[1]/ul/li[2]/div/ul/li[2]/ul/li[4]/a    #点击协同办公中的考勤管理
+    Sleep    1
+    ${handles}    Get Window Handles    #获取页面的handle
+    Select Window    ${handles[1]}    #切换到考勤页面
+    Wait Until Page Contains    考勤系统    30
+    G_OverAndClick    ${locator[:31]}    ${locator}
+    Sleep    1
+
+G_OverAndClick
+    [Arguments]    ${locator1}    ${locator2}
+    [Documentation]    菜单选择（悬停-点击）
+    Mouse over    ${locator1}    #悬停在一级菜单
+    Click Element    ${locator2}    #点击二级菜单
+    Mouse out    ${locator1}    #鼠标离开一级菜单
+
+G_InputText
+    [Arguments]    ${employee_name}
+    [Documentation]    输入姓名、工号，查询
+    Input Text    Xpath=//input[@placeholder="请输入姓名/工号"]    ${employee_name}    #输入内容
+    Sleep    2
+    Click Element    Xpath=//div[@class="simpleChoice"]/i[2]    \    #点击搜索
+
+G_GoBack_Index
+    goto    http://testkq.tahoecndemo.com:8800/#/personnelInfo    #返回员工信息首页‘
+
+G_Department
+    [Arguments]    ${department_name}
+    [Documentation]    输入部门名称-查询
+    Click Element    Xpath=//input[@placeholder="选择部门"]    \    #点击部门
+    Input Text    Xpath=//div[@class="querys"]//div[2]/input[1]    ${department_name}    #输入要查询的部门名称
+    Sleep    1
+    Click Element    Xpath=//div[@class="querys"]//div[2]/i[2]    \    #点击查询
+    Sleep    1
+    Click Element    Xpath=//div[@class="fe-he-btnbox"]/button[1]    \    #点击确定按钮
+    Wait Until Page Contains    工号
+
+G_Clear_Name
+    [Documentation]    清除查询输入的名称/工号
+    Click Element    Xpath=//div[@class="simpleChoice"]/i[1]
+    Sleep    2
+
+G_Get_PaginationText
+    [Arguments]    ${locator}
+    [Documentation]    获取分页信息，用“，”分为列表,返回页面显示的总条数
+    ${paginationText}    Get Webelement    ${locator}
+    ${paginationText_list}    Set Variable    ${paginationText.text.split("，")}
+    [Return]    ${paginationText_list}
+
+G_Clear_Department
+    [Documentation]    清除查询的部门信息
+    Click Element    Xpath=//div[@class="fe-he-searchBox"]/div/div[2]/div/i
+    Sleep    2
+
+G_Click_Search
+    [Documentation]    点击查询按钮，重置页面
+    Click Element    Xpath=//div[@class="simpleChoice"]/i[2]
+
+G_Clear_FilePath
+    [Documentation]    清除磁盘上的文件夹
+    Delete File    C:\\Users\\Administrator\\Downloads    xls
+    Sleep    1
+
+G_Click_Cancel
+    [Documentation]    点击取消
+    Sleep    1
+    Click Element    Xpath=//span[@class="querysBtns"]/button[3]
+
+G_ClearAll
+    G_Clear_Name
+    G_Clear_Department
+
+Set_Env
+    [Arguments]    ${locator}
+    [Documentation]    跳转至操作页面
+    G_Login    duyi    123456
+    G_Jump_Module    ${locator}
+
+G_Department_Q
+    [Arguments]    ${department_name}
+    [Documentation]    输入部门名称-查询
+    Click Element    Xpath=//input[@placeholder="请选择部门"]    \    #点击部门
+    Input Text    Xpath=//div[@class="querys"]//div[2]/input[1]    ${department_name}    #输入要查询的部门名称
+    Sleep    1
+    Click Element    Xpath=//div[@class="querys"]//div[2]/i[2]    \    #点击查询
+    Sleep    1
+    Click Element    Xpath=//div[@class="fe-he-btnbox"]/button[1]    \    #点击确定按钮
+    Wait Until Page Contains    工号
+
+GG
+    Sleep    2
+    Close Browser
+
+G_Import_File
+    [Arguments]    ${index}    ${file_path}    ${verify_data}
+    G_Click_Button    ${index}    #点击导入
+    Sleep    0.5
+    Click Element    Xpath=//div[@class="upload-demo"]/div/button    \    #点击选择文件
+    Sleep    2
+    Upload File    ${file_path}    #文件的路径
+    Sleep    1
+    Click Element    Xpath=//div[@class="upload-demo"]/button    \    #点击导入
+    Sleep    1
+    Page Should Contain    ${verify_data}
+    Click Element    Xpath=//button[@class="fe-message__ok"]    \    #点击确定按钮
+
+G_Return_Date
+    ${year}    Evaluate    datetime.datetime.now().year    datetime
+    ${month}    Evaluate    datetime.datetime.now().month    datetime
+    ${arg}    Set Variable If    ${month}<10    ${year}-0${month}-01    ${year}-${month}-01
+    [Return]    ${arg}
+
+G_Click_Button
+    [Arguments]    ${index}    # 数值类型，根据传值点击不同的按钮
+    [Documentation]    页面上的按钮操作
+    ...    G_Click_Button
+    Click Element    Xpath=//span[@class="querysBtns"]/button[${index}]
+
+G_Clear_Search_Form
+    [Documentation]    点击高级搜索中的清空
+    ...    G_Clear_Search_Form
+    Click Button    Xpath=//div[@class="fe-heightSerBox"]/div/button[2]    \    #点击清除
+
+G_Clear_CancelName
+    [Documentation]    点击取消和清除姓名
+    G_Click_Cancel
+    Sleep    1
+    G_Clear_Name
+
+G_Get_Page_Count
+    [Arguments]    ${locator}
+    ${info}    G_Get_PaginationText    ${locator}
+    ${num}    Get Num From String    ${info[1]}
+    [Return]    ${num[0]}
+
+G_Global
+    ${a}    Get Num From String    %{G_START_END_TIME}[0]
+    ${b}    Get Num From String    %{G_START_END_TIME}[0]
+    Log    ${a}
+    Log    ${b}

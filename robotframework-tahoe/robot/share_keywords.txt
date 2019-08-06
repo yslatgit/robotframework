@@ -1,8 +1,7 @@
 *** Settings ***
 Library           OperatingSystem
 Resource          GUI_Keywords.txt
-Library           RequestsLibrary
-Resource          VAR_FILE.txt
 Library           SSHLibrary
-Library           Collections
 Resource          SSH_Keywords.txt
+Resource          API_Keywords.txt
+Resource          Datebase_keywords.txt

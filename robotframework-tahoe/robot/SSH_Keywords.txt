@@ -1,6 +1,5 @@
 *** Settings ***
 Library           SSHLibrary
-Library           MyLibrary
 
 *** Keywords ***
 S_Connection

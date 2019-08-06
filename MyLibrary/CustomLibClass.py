@@ -1,6 +1,7 @@
 #coding:utf-8
 
 import os
+import re
 import time
 import autoit
 
@@ -16,11 +17,21 @@ PATH = lambda p: os.path.abspath(
 class GetDataFromExcel:
     """读取excel中的测试数据"""
     def __init__(self, path=r"C:\Users\Administrator\Desktop\ride.xlsx", sheet_name='ride',datatype=1,num=-1):
-        self.path = path
+        self.path = self._make_path(path)
         self.sheet_name = sheet_name
         self.datatype = datatype
         self.num = num
         self.cls = []
+
+    def _make_path(self,path):
+        res = path.find(".")
+        if res != -1:
+            file_path = path
+        else:
+            os.chdir(path=path)
+            file_name = os.listdir()[1]
+            file_path = path + "\\" + file_name
+        return file_path
 
     def get_data(self):
         """根据N的值获取测试用例默认获取全部,type:1代表返回列表，2代表返回字典"""
@@ -117,7 +128,56 @@ class MakeCommand:
     def make_command(self):
         return self.command + self.content
 
+"""时间相关"""
+class CompareTime:
+    """比较时间是否在某一区间"""
+    def __init__(self,start_time,end_time,time_list):
+        self.start_time = self._timestamp(start_time)
+        self.end_time = self._timestamp(end_time)
+        self.time_list = time_list
+
+    def _timestamp(self,arg):
+        stamp = time.mktime(time.strptime(arg, '%Y-%m-%d'))
+        return int(stamp)
+
+    def compare_time(self):
+        for i in self.time_list:
+            i = self._timestamp(i)
+            if i >= self.start_time and i <=self.end_time:
+                pass
+            else:
+                return "ERROR"
+
+class TimeInListSort:
+    """查看列表中的时间排序是否正确"""
+    def __init__(self,list,type=0):
+        self.list = list if type == 0 else self._change(list)
+
+    def _change(self,datas):
+        """转换为时间列表"""
+        middle_data = []
+        for data in datas:
+            gg = re.findall(r"(\d{4}-\d{1,2}-\d{1,2})",data)
+            middle_data.extend(gg)
+        return middle_data
+
+    def sort(self):
+        list_1 = []
+        for i in self.list:
+            stamp = time.mktime(time.strptime(i, '%Y-%m-%d'))
+            list_1.append(int(stamp))
+        list_2 = list_1.copy()
+        list_2.sort()
+        if list_1 == list_2:
+            pass
+        else:
+            return "ERROR"
 
 if __name__ == '__main__':
-    a = MakeCommand("grep","测试","/home/ysl")
-    print(a.make_command())
+    # a = MakeCommand("grep","测试","/home/ysl")
+    # print(a.make_command())
+    # aa = GetDataFromExcel(path=r'C:\Users\Administrator\Downloads',sheet_name=u'员工信息1')
+    # print(len(aa.get_data()))
+    data = ['2019-06-09 ~ 2019-07-01', '2019-07-02 ~ 2019-07-04', '2019-07-05 ~ 无限']
+    A = TimeInListSort(data,type=1)
+    print(A.sort())
