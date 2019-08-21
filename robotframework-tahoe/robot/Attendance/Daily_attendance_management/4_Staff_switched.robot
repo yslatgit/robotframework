@@ -102,12 +102,14 @@ export_department
     [Documentation]    导出部门调班表，校验条数
     [Setup]    G_Clear_FilePath
     Wait Until Page Contains    工号
-    G_Department    信息流程部
+    G_Department    总裁办
     Sleep    2
     G_Click_Button    3    #点击导出
     ${info_xls}    Get Data From Excel    C:\\Users\\Administrator\\Downloads    员工调班1    #从导出的excel中读取数据
+    ${result}    DB_data    ${select_by_department}
+    ${len}    Get Length    ${result}
     ${info_len}    Get Length    ${info_xls}
-    Should Be Equal As Strings    ${info_len-1}    53
+    Should Be Equal As Strings    ${info_len-1}    ${len}
     [Teardown]    G_Clear_Department
 
 export_all
@@ -126,7 +128,7 @@ export_all
 
 staff_switch_one
     [Documentation]    根据某人某一天的班（排班-->休息）
-    ${arg}    Set Variable    18
+    ${arg}    Set Variable    12
     ${list}    Create List
     Wait Until Page Contains    工号
     G_InputText    安铮
@@ -143,6 +145,9 @@ staff_switch_one
     Sleep    5
     ${page_info}    Get Webelements    Xpath=//ul[@class="staff-days"]/li[${arg}]//span[@class="dailyStaff"]
     Should Be Equal As Strings    ${page_info[0].text}    调
+    ${result}    DB_data    ${daily_class_one}
+    ${len}    Get Length    ${result}
+    Should Be Equal As Strings    ${len}    0
     [Teardown]    G_Clear_Name
 
 import_one

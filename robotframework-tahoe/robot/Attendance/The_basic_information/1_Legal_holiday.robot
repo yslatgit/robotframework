@@ -11,7 +11,7 @@ Resource          ../../share_keywords.txt
 *** Test Cases ***
 create_holiday
     [Documentation]    创建新的假日
-    ${arg}    Set Variable    测试    #新建假期的名称
+    ${arg}    Set Variable    测试1    #新建假期的名称
     Wait Until Page Contains    日期
     G_Click_Button    1    #点击新增
     Wait Until Page Contains    是否休息
@@ -21,7 +21,7 @@ create_holiday
     Sleep    0.5
     Click Element    Xpath=//div[@placeholders="选择日期"]/input    \    #点击日期
     Sleep    0.5
-    Click Element    Xpath=//div[@placeholders="选择日期"]//table/tr[3]/td[3]
+    Click Element    Xpath=//div[@placeholders="选择日期"]//table/tr[3]/td[4]
     Sleep    0.5
     Click Element    Xpath=//div[@class="legalHolidayFormBtn" ]/button[1]    \    #点击保存
     Sleep    1

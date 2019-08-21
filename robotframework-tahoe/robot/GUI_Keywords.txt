@@ -176,3 +176,7 @@ G_Global
     ${b}    Get Num From String    %{G_START_END_TIME}[0]
     Log    ${a}
     Log    ${b}
+
+G_Fault_tolerance_OK
+    ${status}    Run Keyword And Return Status    Wait Until Element Is Visible    Xpath=//button[@class="fe-message__ok"]
+    Run Keyword IF    ${status}    Click Element    Xpath=//button[@class="fe-message__ok"]

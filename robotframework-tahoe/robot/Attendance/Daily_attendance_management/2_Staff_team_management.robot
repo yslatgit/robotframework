@@ -62,11 +62,13 @@ query_by_name_num
 query_by_department
     [Documentation]    输入单一部门名称查询
     Wait Until Page Contains    工号
-    G_Department    信息流程部
+    G_Department    总裁办
     Wait Until Page Contains    工号
     Sleep    1
     ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
-    Should Be Equal As Strings    ${page_num}    56    #校验人数是否为58
+    ${result}    DB_data    ${select_by_department}
+    ${len}    Get Length    ${result}
+    Should Be Equal As Strings    ${page_num}    ${len}
     [Teardown]    G_Clear_Department
 
 query_by_department_and_name
@@ -230,6 +232,7 @@ delete_team_first
 
 query_by_departments
     [Documentation]    勾选多个部门名称查询
+    [Setup]    Set_Env    Xpath=//*[@id="nav-box"]/div[2]/div[2]/div[2]/a
     Wait Until Page Contains    工号
     Sleep    2
     Click Element    Xpath=//input[@placeholder="选择部门"]    \    #点击选择部门
@@ -248,18 +251,5 @@ query_by_departments
     Wait Until Page Contains    工号    30
     Sleep    5
     ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
-    Should Be Equal As Strings    ${page_num}    941
-    [Teardown]    G_Clear_Department
-
-download_template
-    [Documentation]    校验下载的模板
-    [Tags]    skip
-    [Setup]    G_Clear_FilePath
-    Wait Until Page Contains    工号
-    G_Click_Button    3    #点击导入
-    Sleep    0.5
-    Click Element    Xpath=//p[@class="importP"]/span    \    #点击下载模板
-    ${info_xls}    Get Data From Excel    C:\\Users\\Administrator\\Downloads    导入数据    #从导出的excel中读取数据
-    ${date}    G_Return_Date
-    Should Be Equal As Strings    ${date}    ${info_xls[0][1]}
-    [Teardown]
+    Should Be Equal As Strings    ${page_num}    26
+    [Teardown]    GG

@@ -1,11 +1,13 @@
 *** Settings ***
 Documentation     类别设置
-Suite Setup       Set_Env    Xpath=//*[@id="nav-box"]/div[5]/div[2]/div[6]/a
-Suite Teardown    GG
+Suite Setup
+Suite Teardown
+Force Tags        skip
 Resource          ../../share_keywords.txt
 
 *** Test Cases ***
 create_Leave_the_category
+    Set_Env    Xpath=//*[@id="nav-box"]/div[5]/div[2]/div[6]/a
     Wait Until Page Contains    类别名称
     ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
     G_Click_Button    1    #点击新增
@@ -17,10 +19,9 @@ create_Leave_the_category
     Sleep    2
     Page Should Contain    新增成功
     Click Element    Xpath=//button[@class="fe-message__ok"]    \    #点击确定按钮
-    ${page_num_2}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
-    ${result}    Calculate Difference    ${page_num}    ${page_num_2}
-    Should Be Equal As Strings    ${result}    1
-    Sleep    3
+    #${page_num_2}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
+    #${result}    Calculate Difference    ${page_num}    ${page_num_2}
+    #Should Be Equal As Strings    ${result}    1
 
 delete_Leave_the_category
     Wait Until Page Contains    类别名称

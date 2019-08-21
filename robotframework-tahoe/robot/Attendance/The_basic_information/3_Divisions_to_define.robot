@@ -16,11 +16,25 @@ query_by_name
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[1]    \    #点击清除
     [Teardown]
 
+export
+    [Documentation]    班次的导出
+    [Tags]
+    [Setup]    G_Clear_FilePath
+    Wait Until Page Contains    班次名称
+    Sleep    2
+    Sleep    1
+    ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
+    G_Click_Button    6    #点击导出
+    ${info_xls}    Get Data From Excel    C:\\Users\\Administrator\\Downloads    员工班次1    #从导出的excel中读取数据
+    ${info_num}    Get Length    ${info_xls}    #数据条数
+    Should Be Equal As Strings    ${page_num}    ${info_num-1}    #导出的数据少一条
+    [Teardown]
+
 stop_use
     [Documentation]    禁用某个班组
     Wait Until Page Contains    班次名称
     Sleep    0.5
-    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测试    #输入要查询的班组
+    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测    #输入要查询的班组
     Sleep    0.5
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[2]    \    #点击搜索
     Sleep    1
@@ -31,7 +45,7 @@ stop_use
     Page Should Contain    禁用成功
     Click Element    Xpath=//button[@class="fe-message__ok"]    \    #点击确定按钮
     Sleep    0.5
-    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测试    #输入要查询的班组
+    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测    #输入要查询的班组
     Sleep    0.5
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[2]    \    #点击搜索
     Sleep    1
@@ -63,7 +77,7 @@ start_use
     [Documentation]    启用班组
     Wait Until Page Contains    班次名称
     Sleep    0.5
-    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测试    #输入要查询的班组
+    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测    #输入要查询的班组
     Sleep    0.5
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[2]    \    #点击搜索
     Sleep    1
@@ -74,7 +88,7 @@ start_use
     Page Should Contain    启用成功
     Click Element    Xpath=//button[@class="fe-message__ok"]    \    #点击确定按钮
     Sleep    0.5
-    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测试    #输入要查询的班组
+    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测    #输入要查询的班组
     Sleep    0.5
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[2]    \    #点击搜索
     Sleep    1
@@ -102,64 +116,14 @@ delete_plan_error
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[1]    \    #点击清除
     [Teardown]
 
-create_divisions
-    [Documentation]    新建班组
-    [Tags]    skip
-    ${plan_name}    Set Variable    测试2
-    Wait Until Page Contains    班次名称
-    G_Click_Button    1    #点击新增
-    Sleep    1
-    Wait Until Page Contains    状态
-    Input Text    Xpath=//div[@class="el-row"]//form/div[1]/div[1]/div/div/div/input    测班次    #班次名称
-    Sleep    0.5
-    Click Element    Xpath=//input[@placeholder="请选择刷卡开始时间"]    \    #选择刷卡开始时间
-    Sleep    1
-    Click Element    Xpath=//div[@class="el-picker-panel__body"]/div[1]/span[10]    \    #点击选9:00
-    Sleep    0.5
-    Click Element    Xpath=//div[@class="el-picker-panel__body"]/div[2]/span[1]    \    #点击选9:00
-    Sleep    2
-    Click Element    Xpath=//input[@placeholder="请选择上班时间"]    \    #选择上班开始时间
-    Sleep    0.5
-    Click Element    Xpath=//div[@id="1564988628672"]/div/div/div/div/span[10]    \    #点击选9:00
-    Sleep    0.5
-    Click Element    Xpath=//div[@id="1564988628672"]/div/div/div/div[2]/span[1]    \    #点击选9:00
-    Sleep    0.5
-    Input Text    Xpath=//div[@class="el-row"]//form/div[6]/div[1]/div/div/div/div/input    5    #输入迟到时间范围
-    Sleep    0.5
-    Click Element    Xpath=//input[@placeholder="请选择刷卡结束时间"]    \    #选择刷卡结束时间
-    Sleep    1
-    Click Element    Xpath=//div[@class="el-picker-panel__body"]/div[1]/span[19]    \    #点击选18:00
-    Sleep    0.5
-    Click Element    Xpath=//div[@class="el-picker-panel__body"]/div[2]/span[1]    \    #点击选18:00
-    Sleep    0.5
-    Click Element    Xpath=//input[@placeholder="请选择下班时间"]    \    #选择下班开始时间
-    Sleep    1
-    Click Element    Xpath=//div[@class="el-picker-panel__body"]/div[1]/span[19]    \    #点击选18:00
-    Sleep    0.5
-    Click Element    Xpath=//div[@class="el-picker-panel__body"]/div[2]/span[1]    \    #点击选18:00
-    Sleep    0.5
-    Input Text    Xpath=//div[@class="el-row"]//form/div[6]/div[2]/div/div/div/div/input    5    #输入迟到时间范围
-    G_Click_Button    7    #点击保存
-    Sleep    0.5
-    Page Should Contain    新增成功
-    Click Element    Xpath=//button[@class="fe-message__ok"]    \    #点击确定按钮
-    Wait Until Page Contains    班次名称
-    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测班次    #输入要查询的班组
-    Sleep    0.5
-    Click Element    Xpath=//div[@class="querys"]/div[2]/i[2]    \    #点击搜索
-    Sleep    1
-    ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
-    Should Be Equal As Strings    ${page_num}    1    #校验
-    [Teardown]
-
 delete_divisions
     [Documentation]    删除班组
     Wait Until Page Contains    班次名称
-    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测试1    #输入要查询的班组
+    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测    #输入要查询的班组
     Sleep    0.5
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[2]    \    #点击搜索
     Sleep    2
-    Click Element    Xpath=//input[@value="0"]    \    #选中当前条
+    Click Element    Xpath=//input[@value="check-all"]    \    #选中当前条
     Sleep    1
     G_Click_Button    3    #点击删除
     Sleep    1
@@ -167,25 +131,12 @@ delete_divisions
     Sleep    2
     Page Should Contain    删除成功
     Click Element    Xpath=//button[@class="fe-message__ok"]    \    #点击确定按钮
-    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测试1    #输入要查询的班组
+    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测    #输入要查询的班组
     Sleep    0.5
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[2]    \    #点击搜索
     Sleep    2
     Page Should Contain    暂无数据    \    #校验
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[1]    \    #点击清除
-    [Teardown]
-
-export
-    [Documentation]    班次的导出
-    [Setup]    G_Clear_FilePath
-    Wait Until Page Contains    班次名称
-    Sleep    2
-    Sleep    1
-    ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
-    G_Click_Button    6    #点击导出
-    ${info_xls}    Get Data From Excel    C:\\Users\\Administrator\\Downloads    员工班次1    #从导出的excel中读取数据
-    ${info_num}    Get Length    ${info_xls}    #数据条数
-    Should Be Equal As Strings    ${page_num}    ${info_num-1}
     [Teardown]
 
 modify_divisions
@@ -209,4 +160,54 @@ modify_divisions
     Click Element    Xpath=//div[@class="querys"]/div[2]/i[2]    \    #点击搜索
     Sleep    2
     Page Should Not Contain    暂无数据    \    #校验
+    [Teardown]
+
+create_divisions
+    [Documentation]    新建班组
+    [Tags]
+    ${plan_name}    Set Variable    测试2
+    Wait Until Page Contains    班次名称
+    G_Click_Button    1    #点击新增
+    Sleep    1
+    Wait Until Page Contains    状态
+    Input Text    Xpath=//div[@class="el-row"]//form/div[1]/div[1]/div/div/div/input    测班次    #班次名称
+    Sleep    2
+    Click Element    Xpath=//input[@placeholder="请选择刷卡开始时间"]    \    #选择刷卡开始时间
+    Sleep    0.5
+    Click Element    Xpath=//div[@class="el-picker-panel__body"]/div[1]/span[10]    \    #点击选9:00
+    Sleep    0.5
+    Click Element    Xpath=//div[@class="el-picker-panel__body"]/div[2]/span[1]    \    #点击选9:00
+    Sleep    2
+    Click Element    Xpath=//input[@placeholder="请选择上班时间"]    \    #选择上班开始时间
+    Sleep    0.5
+    Click Element    Xpath=//input[@placeholder="请选择上班时间"]/following-sibling::div/div/div/div/span[10]    \    #点击选9:00
+    Sleep    0.5
+    Click Element    Xpath=//input[@placeholder="请选择上班时间"]/following-sibling::div/div/div/div[2]/span[1]    \    #点击选9:00
+    Sleep    0.5
+    Input Text    Xpath=//div[@class="el-row"]//form/div[6]/div[1]/div/div/div/div/input    5    #输入迟到时间范围
+    Sleep    0.5
+    Click Element    Xpath=//input[@placeholder="请选择刷卡结束时间"]    \    #选择刷卡结束时间
+    Sleep    1
+    Click Element    Xpath=//input[@placeholder="请选择刷卡结束时间"]/following-sibling::div/div/div/div/span[19]    \    #点击选18:00
+    Sleep    0.5
+    Click Element    Xpath=//input[@placeholder="请选择刷卡结束时间"]/following-sibling::div/div/div/div[2]/span[1]    \    #点击选18:00
+    Sleep    0.5
+    Click Element    Xpath=//input[@placeholder="请选择下班时间"]    \    #选择下班开始时间
+    Sleep    1
+    Click Element    Xpath=//input[@placeholder="请选择下班时间"]/following-sibling::div/div/div/div/span[19]    \    #点击选18:00
+    Sleep    0.5
+    Click Element    Xpath=//input[@placeholder="请选择下班时间"]/following-sibling::div/div/div/div[2]/span[1]    \    #点击选18:00
+    Sleep    0.5
+    Input Text    Xpath=//div[@class="el-row"]//form/div[6]/div[2]/div/div/div/div/input    5    #输入迟到时间范围
+    G_Click_Button    7    #点击保存
+    Sleep    0.5
+    Page Should Contain    新增成功
+    Click Element    Xpath=//button[@class="fe-message__ok"]    \    #点击确定按钮
+    Wait Until Page Contains    班次名称
+    Input Text    Xpath=//input[@placeholder="请输入班次名称"]    测班次    #输入要查询的班组
+    Sleep    0.5
+    Click Element    Xpath=//div[@class="querys"]/div[2]/i[2]    \    #点击搜索
+    Sleep    1
+    ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
+    Should Be Equal As Strings    ${page_num}    1    #校验
     [Teardown]

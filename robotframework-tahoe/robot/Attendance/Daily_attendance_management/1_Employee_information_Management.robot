@@ -41,11 +41,13 @@ query_by_work_num
 query_by_department
     [Documentation]    根据部门查询（输入单一部门名称）
     Wait Until Page Contains    工号
-    G_Department    信息流程部
+    G_Department    总裁办
     Wait Until Page Contains    工号
     Sleep    1
     ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
-    Should Be Equal As Strings    ${page_num}    53    #校验人数是否为174
+    ${result}    DB_data    ${select_by_department}
+    ${len}    Get Length    ${result}
+    Should Be Equal As Strings    ${page_num}    ${len}
     [Teardown]    G_Clear_Department
 
 query_by_names
@@ -262,23 +264,24 @@ export_all
     Sleep    5    \    #增加等待时间确保文件已正常导出
     Wait Until Page Contains    工号
     ${info_xls}    Get Data From Excel    C:\\Users\\Administrator\\Downloads    员工信息1    #从导出的excel中读取数据
-    ${info_num}    Get Length    ${info_xls}    #数据条数
-    Should Be Equal As Strings    ${page_num}    ${info_num-1}
+    ${len}    Get Length    ${info_xls}
+    Should Be Equal As Strings    ${page_num}    ${len-1}
     [Teardown]
 
 export_department
     [Documentation]    导出全部员工信息
     [Setup]    G_Clear_FilePath
     Wait Until Page Contains    工号
-    G_Department    金尊府
+    G_Department    总裁办
     Wait Until Page Contains    工号
     Sleep    5
     ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
     G_Click_Button    1    #点击导出
     Sleep    2
     ${info_xls}    Get Data From Excel    C:\\Users\\Administrator\\Downloads    员工信息1    #从导出的excel中读取数据
-    ${info_num}    Get Length    ${info_xls}    #数据条数
-    Should Be Equal As Strings    ${page_num}    ${info_num-1}
+    ${result}    DB_data    ${select_by_department}    #数据条数
+    Log    ${info_xls.pop(0)}
+    Lists Should Be Equal    ${result}    ${info_xls}
     [Teardown]    G_Clear_Department
 
 export_one
@@ -290,13 +293,14 @@ export_one
     G_Click_Button    1    #点击导出
     Sleep    1
     ${info_xls}    Get Data From Excel    C:\\Users\\Administrator\\Downloads    员工信息1    #从导出的excel中读取数据
-    ${result}    DB_data    ${employee_export_one}
+    ${result}    DB_data    ${select_by_num}
     Log    ${info_xls.pop(0)}
     Lists Should Be Equal    ${result}    ${info_xls}
     [Teardown]    G_Clear_Name
 
 query_by_departments
     [Documentation]    根据部门查询（勾选多个部门）
+    [Setup]    Set_Env    Xpath=//*[@id="nav-box"]/div[2]/div[2]/div[1]/a
     Wait Until Page Contains    工号
     Sleep    2
     Click Element    Xpath=//input[@placeholder="选择部门"]    \    #点击选择部门
@@ -315,7 +319,9 @@ query_by_departments
     Wait Until Page Contains    工号    30
     Sleep    5
     ${page_num}    G_Get_Page_Count    Xpath=//span[@class="paginationText"]    #获取页面信息条数
-    Should Be Equal As Strings    ${page_num}    941
-    [Teardown]    G_Clear_Department
+    ${result}    DB_data    ${select_by_departments}
+    ${len}    Get Length    ${result}
+    Should Be Equal As Strings    ${page_num}    ${len}
+    [Teardown]    GG
 
 *** Keywords ***

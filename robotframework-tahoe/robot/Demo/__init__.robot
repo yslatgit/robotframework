@@ -1,2 +1,2 @@
 *** Settings ***
-Force Tags
+Force Tags        skip

@@ -1,6 +1,6 @@
 *** Settings ***
 Suite Setup       SET_UP
-Test Teardown     Close Window
+Test Teardown
 Resource          share_keywords.txt
 
 *** Keywords ***
