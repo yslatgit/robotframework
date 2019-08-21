@@ -1,0 +1,46 @@
+*** Settings ***
+Library           DatabaseLibrary
+Library           MyLibrary
+Library           Collections
+
+*** Keywords ***
+DB_data
+    [Arguments]    ${sql}
+    [Documentation]    查询数据库中的数据返回数据列表
+    DB_Connection
+    ${var}    query    ${sql}
+    ${res}    format_to_list    ${var}
+    [Return]    ${res}
+
+DB_data_count
+    [Documentation]    查询数据库中的数据返回总数
+
+Check Daily Info
+    [Arguments]    ${sql}    ${check_info}
+    [Documentation]    校验日报中的假单信息(单数据校验)
+    Sleep    10
+    ${res}    DB_data    ${sql}
+    ${info}    Create List    ${check_info}
+    List Should Contain Value    ${res}    ${info}
+
+Check Daily Info2
+    [Arguments]    ${sql}    ${check_info}
+    [Documentation]    校验日报中的假单信息(多数据校验)
+    Sleep    10
+    ${res}    DB_data    ${sql}
+    ${info}    Format To List2    ${check_info}
+    List Should Contain Sub List    ${res}    ${info}
+
+Check_Clock_Info
+    [Arguments]    ${check_info}    ${sql}
+    [Documentation]    清除打卡信息
+    Sleep    5
+    ${res}    DB_data    ${sql}
+    ${info}    Create List    ${check_info}
+    List Should Contain Value    ${res}    ${info}
+    #Execute Sql String    delete [tahoe_atnd].[dbo].[sign_data] where equipmentID='123456789';delete [tahoe_sec].[dbo].[tbm_mobiledata] where equipmentID='123456789'
+
+DB_Connection
+    [Documentation]    链接数据库
+    Connect To Database Using Custom Params    pyodbc    "Driver={SQL Server};Server=10.0.104.238;Port=1433;Database=tahoe_atnd;UID=KQ;PWD=KQpassword;"
+    Connect To Database Using Custom Params    pyodbc    "Driver={SQL Server};Server=10.0.104.238;Port=1433;Database=tahoe_sec;UID=KQ;PWD=KQpassword;"

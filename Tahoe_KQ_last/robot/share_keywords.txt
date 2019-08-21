@@ -1,0 +1,7 @@
+*** Settings ***
+Library           OperatingSystem
+Resource          GUI_Keywords.txt
+Library           SSHLibrary
+Resource          SSH_Keywords.txt
+Resource          API_Keywords.txt
+Resource          Datebase_keywords.txt

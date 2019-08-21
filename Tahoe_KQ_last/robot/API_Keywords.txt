@@ -1,0 +1,36 @@
+*** Settings ***
+Library           RequestsLibrary
+Library           SeleniumLibrary
+Library           MyLibrary
+Resource          GUI_Keywords.txt
+
+*** Keywords ***
+POST_REQ
+    [Arguments]    ${url}    ${data}    ${cookies}
+    [Documentation]    post请求
+    ${headers}    Create Dictionary    Content-Type=application/json    charset=UTF-8
+    Create Session    api    ${url}    ${headers}    ${cookies}
+    ${re}    Post Request    api    /    ${data}
+    ${result}    Set Variable    ${re.content.decode("utf8")}
+    [Return]    ${result}
+
+Get_GaoQi1_Cookies
+    [Documentation]    gaoqi1的cookies
+    #G_Login    duyi    123456
+    #${data}    Get Cookies
+    ${cookies}    Handle Cookies    BIGipServerpool_testOA_8080=2540175370.36895.0000; BIGipServerekp_static=996671498.20480.0000; cookie: JSESSIONID=26567C37B8F8C7C3DD30A785E78C7319;BIGipServerpool_testOA_portal=996671498.36895.0000; UCSSOID=eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxNWMxNmI1ODk5NjAxYjQzY2IyNTNkODRhNGFhMGRkNCIsInRfaXAiOiIxMC4zMS4yOS43MCIsInRfc2kiOiJPQSIsInRfdWkiOnsiZmRVc2VybmFtZSI6Imdhb3FpMSIsImZkT3JnTmFtZVRyZWUiOiIv5rOw56a-6ZuG5ZuiL-mbhuWbouaAu-mDqC_kv6Hmga_mtYHnqIvpg6gv5YiG5L6b5pa557uEIiwiZmRTaWQiOiIxNWMxNmI1ODk5NjAxYjQzY2IyNTNkODRhNGFhMGRkNCIsImZkTmFtZSI6IumrmOeQpiIsImZkR2VuZGVyIjoxLCJmZE9yZ0lkIjoiMTVhYTI5YTRkMzNkYWI4NzEyMGZjYTY0Y2VlOTRmMmMiLCJmZE9yZ05hbWUiOiLliIbkvpvmlrnnu4QiLCJmZE9yZ0lkVHJlZSI6Ii8xNWE3ZjM1MGY0YjdiNzM4YzA5NWE4OTRkN2NiOTU2Ni8xNWE3ZjM1MGY1MDk1Yzg3NDQ4YjAwZTRjOTBhODhkNC8xNWE3ZjM1MGY5NzE5Zjg1YjNiNTk4MTQwYzU5NmU5Yi8xNWFhMjlhNGQzM2RhYjg3MTIwZmNhNjRjZWU5NGYyYyJ9LCJpc3MiOiJnYW9xaTEiLCJ0X3VhIjoiZTY5MTciLCJpYXQiOjE1NjUyNDU2ODd9.bhE-whMOIHtDOKNmcSFQ9BrEtdUxC7ClMq8mAAIzbtg3wOIjbd_fKvuHFrOQWJrrA0q0LKK62tPe9KBlX8pM4A
+    [Return]    ${cookies}
+
+Get_SunPeng1_Cookies
+    [Documentation]    sunpeng1的cookies
+    #G_Login    duyi    123456
+    #${data}    Get Cookies
+    ${cookies}    Handle Cookies    UCSSOID=eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxNWJhNTY5YTFiZDU4MzFhYTMwNjkwMTRkY2NiYjA3ZCIsInRfaXAiOiIxMC4zMS4yOS43MCIsInRfc2kiOiJPQSIsInRfdWkiOnsiZmRVc2VybmFtZSI6InN1bnBlbmcxIiwiZmRPcmdOYW1lVHJlZSI6Ii_ms7Dnpr7pm4blm6Iv6ZuG5Zui5oC76YOoL-S_oeaBr-a1geeoi-mDqC_pobnnm67nrqHnkIblip7lhazlrqQv5oCn6IO9566h55CGIiwiZmRMb2NrIjotMSwiZmRTaWQiOiIxNWJhNTY5YTFiZDU4MzFhYTMwNjkwMTRkY2NiYjA3ZCIsImZkTmFtZSI6IuWtmem5jyIsImZkR2VuZGVyIjoxLCJmZE9yZ0lkIjoiMTYyMmI3ZDBkMzU1MDBlMTZlZDMxYjA0MGJkYmI2MjgiLCJmZE9yZ05hbWUiOiLmgKfog73nrqHnkIYiLCJmZE9yZ0lkVHJlZSI6Ii8xNWE3ZjM1MGY0YjdiNzM4YzA5NWE4OTRkN2NiOTU2Ni8xNWE3ZjM1MGY1MDk1Yzg3NDQ4YjAwZTRjOTBhODhkNC8xNWE3ZjM1MGY5NzE5Zjg1YjNiNTk4MTQwYzU5NmU5Yi8xNjFkM2YxMDU1Mzk0N2IxMzAyMzM1ZDQxMWQ4NDFiNS8xNjIyYjdkMGQzNTUwMGUxNmVkMzFiMDQwYmRiYjYyOCJ9LCJpc3MiOiJzdW5wZW5nMSIsInRfdWEiOiJlNjkxNyIsImlhdCI6MTU2NTMzNzY1NH0.TxVvpT7-bDxFnfmAIwErU5PljaWZKSIfPJH_snTX8xAIPiiDMNlR7WLfH5YqVxtDErSfOXvB5iy5JaxL20RAeg
+    [Return]    ${cookies}
+
+Get_XiaoDD_Cookies
+    [Documentation]    sunpeng1的cookies
+    #G_Login    duyi    123456
+    #${data}    Get Cookies
+    ${cookies}    Handle Cookies    UCSSOID=eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxNjFlODhiNWYyMDU4MWRmODUwYjExZTRmZGVhNGNlNCIsInRfaXAiOiIxMC4zMS4xMjkuMTQxIiwidF9zaSI6Ik9BIiwidF91aSI6eyJmZFVzZXJuYW1lIjoieGlhb2R1b2R1byIsImZkT3JnTmFtZVRyZWUiOiIv5rOw56a-6ZuG5ZuiL-WcsOS6p-adv-Wdly_npo_lt57ljLrln58v56aP5bee5Z-O5biC5YWs5Y-4L-S6uuWKm-ihjOaUv-mDqC_kurrlipvnu4QiLCJmZExvY2siOi0xLCJmZFNpZCI6IjE2MWU4OGI1ZjIwNTgxZGY4NTBiMTFlNGZkZWE0Y2U0IiwiZmROYW1lIjoi6IKW5py15py1IiwiZmRHZW5kZXIiOi0xLCJmZE9yZ0lkIjoiNmEzYzI2OGIwZWEyNGRmZDllOTM5Y2RjZDc3MTZjNGYiLCJmZE9yZ05hbWUiOiLkurrlipvnu4QiLCJmZE9yZ0lkVHJlZSI6Ii8xNWE3ZjM1MGY0YjdiNzM4YzA5NWE4OTRkN2NiOTU2Ni8xNWE3ZjM1MGY0YzI1ODBlYTFkZjFiZDQ5ZDNiMDI4Ny8xNjFjNDdkZjY3M2VjMWRmMDM0OTUxZTQ2YjRhNDU5MC8xNjFjNDdkZjY4MzVmYjcyYzYxNWRjODRmMTA4MzhmYS8wM2YxYjBmZGMwY2I0NDc1OTcxYTI3NjU2YzYxNDZmZi82YTNjMjY4YjBlYTI0ZGZkOWU5MzljZGNkNzcxNmM0ZiJ9LCJpc3MiOiJ4aWFvZHVvZHVvIiwidF91YSI6ImU2OTE3IiwiaWF0IjoxNTY2MTk4MTY3fQ.NHbffXZETUJwXO13Frt-Mlb5-ulvTF4-7Rh_csrfjmKJQgDteoXRnA8UTu0gBE6w7lS2qw3f8Fk2bdIHujCQvQ; LtpaToken=AAECAzVENDBFQTk0NUZENDE4OTR4aWFvZHVvZHVv6v6JvqlDfWYv1BQIjXo/Vc4UNDQ=
+    [Return]    ${cookies}
