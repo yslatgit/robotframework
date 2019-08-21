@@ -197,15 +197,17 @@ export_one
 
 turn_in
     [Documentation]    根据名称查询（单一条件）
-    [Tags]    skip
+    [Tags]
     Wait Until Page Contains    工号
-    G_InputText    cairongyao
+    G_InputText    caisijie
     Sleep    2
+    Click Element    Xpath=//tr[@class="v-table-row"]
+	Sleep    2
     G_Click_Button    2    #点击转在职按钮
     Sleep    15
-    ${num}    DB_Data    select dr \ from [tahoe_atnd].[dbo].[kq_user] where cusercode='cairongyao'    #转在职后dr为0
+    ${num}    DB_Data    select dr \ from [tahoe_atnd].[dbo].[kq_user] where cusercode='caisijie'    #转在职后dr为0
     Should Be Equal As Strings    ${num[0][0]}    0
-    [Teardown]    G_Clear_Name
+    [Teardown]
 
 *** Keywords ***
 query_person
